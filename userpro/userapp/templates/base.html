@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - Employee Management</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'employee_list' %}">Employee List</a></li>
+                <li><a href="{% url 'employee_list_api' %}">Employee list api for superuser only</a></li>
+                <li><a href="{% url 'employee_create' %}">Add Employee</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

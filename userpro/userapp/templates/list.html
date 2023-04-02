@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Employee
+    <table id="employee-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <th>Designation</th>
+                <th>details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in page_obj %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.address }}</td>
+                    <td><img src="{{ employee.photo.url }}" width="100"></td>
+                    <td>{{ employee.designation }}</td>
+                    <td><a href="{% url 'employee_detail' pk=employee.pk %}" class="btn btn-primary">View Details</a></td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            $('#employee-table').DataTable({
+                "pagingType": "full_numbers",
+                "searching": true
+            });
+        });
+    </script>
+{% endblock %}
